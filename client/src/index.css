@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+ES+Deco:wght@100..400&family=Playwrite+US+Modern:wght@100..400&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+}
+
+h1 {
+  font-size: 36px; font-weight: 800; color: #252525; margin: 32px 0;
+}
+
+ h2 {
+  font-size: 22px; font-weight: 700; color: #252525; margin: 24px 0;
+}
+ h3 {
+  font-size: 18px; font-weight: 600; color: #333333; margin: 20px 0;
+}
+ h4 {
+  font-size: 16px; font-weight: 500; color: #444444; margin: 16px 0;
+}
+ h5 {
+  font-size: 14px; font-weight: 400; color: #444444; margin: 12px 0;
+}
+ h5 {
+  font-size: 14px; font-weight: 400; color: #444444; margin: 12px 0;
+}
+
+ strong {
+  font-weight: 700;
+}
+ ol {
+  margin-left: 30px; list-style-type: decimal;
+}
+
+.button-primary {
+  @apply flex font-bold items-center gap-[8px] text-white px-[16px] py-[8px] rounded-[12px] bg-[#3DCBB1] text-sm hover:text-emerald-500 transform transition-transform duration-200 hover:scale-105;
+}
+
+.button-outline {
+  @apply border border-[#1B1B1B] text-[#1B1B1B] rounded-[12px] px-[16px] py-[8px] font-bold text-sm hover:text-emerald-500 transform transition-transform duration-200 hover:scale-105;
+}
+
+.btn-category{
+  @apply rounded-[12px] border border-[#C4C4C4] text-[#1B1B1B] w-[140px] h-[40px] items-center flex justify-center text-sm opacity-75 hover:text-emerald-500 transform transition-transform duration-200 hover:scale-105;
+}
+
+.btn-category-chosen{
+  @apply rounded-[12px] border border-[#3DCBB1] text-[#3DCBB1] w-[140px] h-[40px] items-center flex justify-center text-sm opacity-75 hover:text-white transform transition-transform duration-200 hover:scale-105;
+}
+
+.course-card {
+  @apply w-[290px] h-[400px] py-[20px] mb-[20px] bg-white rounded-[12px] shadow-lg flex flex-col items-center justify-center gap-[8px] p-[16px] cursor-pointer transform transition-transform duration-200 hover:scale-105;
+}
+
