@@ -1,7 +1,5 @@
-# Tên của workflow hiển thị trong tab "Actions"
-name: Build and Deploy
+name: Build, Test and Deploy
 
-# Kích hoạt workflow khi có push lên nhánh main
 on:
   push:
     branches:
@@ -9,43 +7,58 @@ on:
 
 jobs:
   deploy:
-    # Sử dụng máy ảo Ubuntu để chạy các bước
     runs-on: ubuntu-latest
 
     steps:
-      # Bước 1: Clone mã nguồn từ GitHub vào máy ảo
       - name: Checkout source code
         uses: actions/checkout@v3
 
-      # Bước 2: Thiết lập Docker Buildx để hỗ trợ build đa nền tảng
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+
+     # - name: Install and test backend
+      #  working-directory: ./server
+       # run: |
+        #  npm install
+         # npm test
+
+
+      #- name: Install and test
+       # working-directory: ./client
+        #run: |
+         # npm install
+          #npm run test
+
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Bước 3: Đăng nhập vào DockerHub bằng thông tin trong Secrets
       - name: Log in to DockerHub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}  # Username DockerHub (lưu trong GitHub Secrets)
-          password: ${{ secrets.DOCKERHUB_TOKEN }}     # DockerHub token (không nên dùng mật khẩu thật)
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Bước 4: Build và đẩy image cho frontend (client) lên DockerHub
+
       - name: Build and push client image
         uses: docker/build-push-action@v5
         with:
-          context: ./client   # Thư mục chứa Dockerfile frontend
-          push: true          # Push image lên DockerHub
+          context: ./client
+          push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/fullstack-elearning-client:latest
 
-      # Bước 5: Build và đẩy image cho backend (server) lên DockerHub
       - name: Build and push server image
         uses: docker/build-push-action@v5
         with:
-          context: ./server   # Thư mục chứa Dockerfile backend
+          context: ./server
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/fullstack-elearning-server:latest
 
-      # Bước 6 (tuỳ chọn): Chạy script deploy (nếu có)
-      - name: Deploy (optional)
+
+      - name: Deploy
         run: echo "Deploy step here (e.g. SSH to server and restart containers)"
-        # Ví dụ có thể thay bằng:
-        # run: ssh user@your-vps "cd /app && docker compose pull && docker compose up -d"
+
+        
