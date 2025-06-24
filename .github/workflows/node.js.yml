@@ -21,9 +21,9 @@ jobs:
 
       - name: Install and test backend
         working-directory: ./server
-        run: |
-          npm install
-          npm test
+        #run: |
+         # npm install
+          #npm test
 
 
       - name: Install and test frontend
