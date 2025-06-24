@@ -60,6 +60,7 @@ const Footer = () => {
         </ul>
 
         <p className="text-base text-gray-300">© Skill Aura. All rights reserved.</p>
+        <p className="text-base text-gray-300">© Skill Aura. All rights reserved.</p>
       </div>
     </footer>
 
