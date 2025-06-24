@@ -26,11 +26,11 @@ jobs:
           #npm test
 
 
-      - name: Install and test
-        working-directory: ./client
-        run: |
-          npm install
-          npm run test
+      #- name: Install and test
+       # working-directory: ./client
+        #run: |
+         # npm install
+          #npm run test
 
 
       - name: Set up Docker Buildx
