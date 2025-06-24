@@ -1,11 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const app = express();
-const payOS = require('./src/config/payos');
 const fs = require('fs');
 const path = require('path');
 
+const app = express();
 
 const avatarDir = path.join(__dirname, 'uploads/avatars');
 if (!fs.existsSync(avatarDir)) {
@@ -14,19 +13,18 @@ if (!fs.existsSync(avatarDir)) {
 
 app.use('/uploads', express.static('uploads'));
 app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    credentials: true
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  credentials: true
 }));
 app.use(express.json());
-
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url} ${res.statusCode}`);
   next();
 });
 
-
+// Routes
 const authRoutes = require('./src/routes/auth.routes');
 const userRoutes = require('./src/routes/user.routes');
 const categoryRoutes = require('./src/routes/category.routes');
@@ -41,15 +39,18 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/courses', courseRoutes);
-app.use('/api', lessonRoutes); 
-app.use('/api', reviewRoutes); 
+app.use('/api', lessonRoutes);
+app.use('/api', reviewRoutes);
 app.use('/api', enrollmentRoutes);
 app.use('/api', cartRoutes);
 app.use('/api/payments', paymentRoutes);
 
+// ⚠️ KHÔNG chạy listen khi đang test
+if (process.env.NODE_ENV !== 'test') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, async () => {
-  console.log(`Server is running on port ${PORT}`);
-
-});
+module.exports = app;
