@@ -26,7 +26,7 @@ jobs:
           #npm test
 
 
-      - name: Install and test frontend
+      - name: Install and test
         working-directory: ./client
         run: |
           npm install
