@@ -2,7 +2,8 @@ FROM node:18
 
 WORKDIR /app
 
-COPY package*.json ./
+# Nếu có xung đột, bỏ file lock để npm tự xử lý
+COPY package.json ./
 RUN npm install --legacy-peer-deps
 
 COPY . .
